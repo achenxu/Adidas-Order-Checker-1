@@ -72,7 +72,7 @@ def order_checker():
 		response = session.post(request_link, headers=headers, data=data)
 		if response.status_code == 200:
 			item = find_between(response.content, '<span class="name">', '</span>').replace('\n', '').title()
-			size = find_between(response.content, '<span class="label">Size: </span>\n<span class="value">', '</span>').replace('\n', '').replace(' ', '')
+			size = find_between(response.content, '<span class="label">Size: </span>\n<span class="value">', '</span>').replace('\n', '').replace(' ', '').replace('-', '.5')
 			try:
 				content = response.content[response.content.index("<div class='order-step selected'"):]
 				order_status = find_between(content, '<div class="order-step-content-wrp">', '</div>')
