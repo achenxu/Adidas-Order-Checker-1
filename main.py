@@ -101,38 +101,38 @@ def order_checker():
 			failed_orders.append(order_number)
 			print '[Order #{}] Error retrieving order order status\n'.format(order_number)
 		
+		if orders_processing != []:
+			processing = ['{}:{}'.format(emails[order_numbers.index(order_number)], order_number) for order_number in orders_processing]
+			processing = '\n'.join(processing)
+		else:
+			processing = 'None'
+		if orders_confirmed != []:
+			confirmed = ['{}:{}'.format(emails[order_numbers.index(order_number)], order_number) for order_number in orders_confirmed]
+			confirmed = '\n'.join(confirmed)
+		else:
+			confirmed = 'None'
+		if orders_shipped != []:
+			shipped = ['{}:{}'.format(emails[order_numbers.index(order_number)], order_number) for order_number in orders_shipped]
+			shipped = '\n'.join(shipped)
+		else:
+			shipped = 'None'
+		if orders_delivered != []:
+			delivered = ['{}:{}'.format(emails[order_numbers.index(order_number)], order_number) for order_number in orders_delivered]
+			delivered = '\n'.join(delivered)
+		else:
+			delivered = 'None'
+		if failed_orders != []:
+			failed = ['{}:{}'.format(emails[order_numbers.index(order_number)], order_number) for order_number in failed_orders]
+			failed = '\n'.join(failed)
+		else:
+			failed = 'None'
+
 		if sleep_time != 0:
 			smart_sleep(sleep_time)
 
 	print 'Order checking complete\n\n{} orders processing\n{} orders confirmed\n{} orders shipped\n{} orders delivered\n{} orders failed to check\n'.format(len(orders_processing), len(orders_confirmed), len(orders_shipped), len(orders_delivered), len(failed_orders))
 
-	if orders_processing != []:
-		orders_processing = ['{}:{}'.format(emails[order_numbers.index(order_number)], order_number) for order_number in orders_processing]
-		orders_processing = '\n'.join(orders_processing)
-	else:
-		orders_processing = 'None'
-	if orders_confirmed != []:
-		orders_confirmed = ['{}:{}'.format(emails[order_numbers.index(order_number)], order_number) for order_number in orders_confirmed]
-		orders_confirmed = '\n'.join(orders_confirmed)
-	else:
-		orders_confirmed = 'None'
-	if orders_shipped != []:
-		orders_shipped = ['{}:{}'.format(emails[order_numbers.index(order_number)], order_number) for order_number in orders_shipped]
-		orders_shipped = '\n'.join(orders_shipped)
-	else:
-		orders_shipped = 'None'
-	if orders_delivered != []:
-		orders_delivered = ['{}:{}'.format(emails[order_numbers.index(order_number)], order_number) for order_number in orders_delivered]
-		orders_delivered = '\n'.join(orders_delivered)
-	else:
-		failed_orders = 'None'
-	if failed_orders != []:
-		failed_orders = ['{}:{}'.format(emails[order_numbers.index(order_number)], order_number) for order_number in failed_orders]
-		failed_orders = '\n'.join(failed_orders)
-	else:
-		failed_orders = 'None'
-
-	results = 'Orders Processing\n\n{}\n\nOrders Confirmed\n\n{}\n\nOrders Shipped\n\n{}\n\nOrders Delivered\n\n{}\n\nOrders Failed to Check\n\n{}'.format(orders_processing, orders_confirmed, orders_shipped, orders_delivered, failed_orders)
+	results = 'Orders Processing\n\n{}\n\nOrders Confirmed\n\n{}\n\nOrders Shipped\n\n{}\n\nOrders Delivered\n\n{}\n\nOrders Failed to Check\n\n{}'.format(processing, confirmed, shipped, delivered, failed)
 
 	with open('results.txt', 'w') as myfile:
 		myfile.write(results)
